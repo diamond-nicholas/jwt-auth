@@ -1,5 +1,6 @@
 const express = require('express');
 const connectDB = require('./db/connet');
+const mainRouter = require('./Routes/main');
 const errorHandlerMiddleware = require('./Middleware/error-handler');
 const notFound = require('./Middleware/not-found');
 require('dotenv').config();
@@ -10,6 +11,7 @@ const app = express();
 app.use(express.static('./public'));
 app.use(express.json());
 
+app.use('api/v1', mainRouter);
 app.use(errorHandlerMiddleware);
 app.use(notFound);
 app.get('/', (req, res) => {
